@@ -31,7 +31,7 @@ if($message['from']['username'] == 'AndreaRyu'){
 	$parameters["method"] = "sendMessage";
 	echo json_encode($parameters);
 	return;
-} elseif ($message['entities'][0]['type'] == 'bot_command' && $text == '/offendi') {
+} elseif ($message['entities'][0]['type'] == 'bot_command' && $text == '/offendi' || $text == '/offendi@TabMerdaBot') {
 	error_log($message['entities'][0]['type'] . $text );
 	$text = $lines[0];
 	header("Content-Type: application/json");
