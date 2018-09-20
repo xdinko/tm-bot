@@ -22,7 +22,7 @@ $text = strtolower($text);
 
 $lines = file('https://tabby-merda.herokuapp.com/frasi.txt');
 
-shuffle($lines)
+shuffle($lines);
 
 if($message['from']['username'] == 'xDinKo'){
 	$text = $lines[0];
