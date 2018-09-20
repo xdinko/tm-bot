@@ -26,7 +26,17 @@ shuffle($lines);
 
 if($message['from']['username'] == 'AndreaRyu'){
 	$text = $lines[0];
-}else{
+	header("Content-Type: application/json");
+	$parameters = array('chat_id' => $chatId, "text" => $text, "reply_to_message_id" => $messageId);
+	$parameters["method"] = "sendMessage";
+	echo json_encode($parameters);
+} elseif ($message['entities'][0]['type'] == 'bot_command' && $message == '/offendi') {
+	$text = $lines[0];
+	header("Content-Type: application/json");
+	$parameters = array('chat_id' => $chatId, "text" => $text);
+	$parameters["method"] = "sendMessage";
+	echo json_encode($parameters);
+} else{
 	return;
 }
 
