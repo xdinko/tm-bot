@@ -24,7 +24,7 @@ $lines = file('https://tabby-merda.herokuapp.com/frasi.txt');
 
 shuffle($lines)
 
-if($message['from']['username'] == 'GiulioLaJ' || $message['from']['username'] == 'xDinKo'){
+if($message['from']['username'] == 'xDinKo'){
 	$text = $lines[0];
 }else{
 	return;
