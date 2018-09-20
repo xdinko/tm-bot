@@ -23,7 +23,7 @@ $text = strtolower($text);
 $lines = file('https://tabby-merda.herokuapp.com/frasi.txt');
 
 shuffle($lines);
-error_log($message['entities'][0]['type'] . $message );
+error_log($message['entities'][0]['type'] . $text );
 if($message['from']['username'] == 'AndreaRyu'){
 	error_log("reply");
 	$text = $lines[0];
@@ -33,6 +33,7 @@ if($message['from']['username'] == 'AndreaRyu'){
 	echo json_encode($parameters);
 	return;
 } elseif ($message['entities'][0]['type'] == 'bot_command' && $text == '/offendi') {
+	error_log($message['entities'][0]['type'] . $text );
 	$text = $lines[0];
 	header("Content-Type: application/json");
 	$parameters = array('chat_id' => $chatId, "text" => $text);
