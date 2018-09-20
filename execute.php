@@ -20,6 +20,10 @@ $text = $text . $message['from']['username'] . $messageId;
 $text = trim($text);
 $text = strtolower($text);
 
+if($message['from']['username'] == 'GiulioLaJ'){
+	$text = 'Ciao La J';
+}
+
 header("Content-Type: application/json");
 $parameters = array('chat_id' => $chatId, "text" => $text, "reply_to_message_id" => $messageId);
 $parameters["method"] = "sendMessage";
