@@ -15,7 +15,6 @@ $lastname = isset($message['chat']['last_name']) ? $message['chat']['last_name']
 $username = isset($message['chat']['username']) ? $message['chat']['username'] : "";
 $date = isset($message['date']) ? $message['date'] : "";
 $text = isset($message['text']) ? $message['text'] : "" ;
-$text = $text . $message['from']['username'] . $messageId;
 
 $text = trim($text);
 $text = strtolower($text);
