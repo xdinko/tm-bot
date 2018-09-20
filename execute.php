@@ -20,7 +20,7 @@ $text = $text . $message['from']['username'] . $messageId;
 $text = trim($text);
 $text = strtolower($text);
 
-$lines = file('http://www.example.com/');
+$lines = file('https://tabby-merda.herokuapp.com/frasi.txt');
 
 shuffle($lines)
 
