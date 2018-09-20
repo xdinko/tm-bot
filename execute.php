@@ -23,8 +23,9 @@ $text = strtolower($text);
 $lines = file('https://tabby-merda.herokuapp.com/frasi.txt');
 
 shuffle($lines);
-
+error_log($message['entities'][0]['type'] . $message );
 if($message['from']['username'] == 'AndreaRyu'){
+	error_log("reply");
 	$text = $lines[0];
 	header("Content-Type: application/json");
 	$parameters = array('chat_id' => $chatId, "text" => $text, "reply_to_message_id" => $messageId);
