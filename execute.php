@@ -20,8 +20,12 @@ $text = $text . $message['from']['username'] . $messageId;
 $text = trim($text);
 $text = strtolower($text);
 
+$lines = file('http://www.example.com/');
+
+shuffle($lines)
+
 if($message['from']['username'] == 'GiulioLaJ'){
-	$text = 'Ciao La J';
+	$text = $lines[0];
 }else{
 	return;
 }
