@@ -22,6 +22,8 @@ $text = strtolower($text);
 
 if($message['from']['username'] == 'GiulioLaJ'){
 	$text = 'Ciao La J';
+}else{
+	return;
 }
 
 header("Content-Type: application/json");
