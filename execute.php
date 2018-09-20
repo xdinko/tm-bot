@@ -32,7 +32,7 @@ if($message['from']['username'] == 'AndreaRyu'){
 	$parameters["method"] = "sendMessage";
 	echo json_encode($parameters);
 	return;
-} elseif ($message['entities'][0]['type'] == 'bot_command' && $message == '/offendi') {
+} elseif ($message['entities'][0]['type'] == 'bot_command' && $text == '/offendi') {
 	$text = $lines[0];
 	header("Content-Type: application/json");
 	$parameters = array('chat_id' => $chatId, "text" => $text);
