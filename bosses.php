@@ -119,7 +119,7 @@ foreach ($bosses as &$value) {
              $resp = $resp . "\xE2\x9D\x8C ";
           }
     $resp = $resp . "*" . toText($wings["id"]) . "*\n";
-        $resp = $resp . $status . "*\n";
+        $resp = $resp . $status . "\n";
     }
 }
 
