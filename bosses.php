@@ -4,10 +4,11 @@
 
 //next example will recieve all messages for specific conversation
 $service_url = 'http://api.guildwars2.com/v2/raids';
+$my_bosses = "https://api.guildwars2.com/v2/account/raids";
 function callAPI($method, $url, $data){
   $proxy = 'proxy.eng.it:3128';
   $proxyauth = 'cramato:Cri%2487i%40n';
-
+  $authorization = "Authorization: Bearer 4D60AA9D-3C10-0343-81FB-5E905F6F4B5E842E09EA-AFF4-40CB-9AC8-AA6FB4F0FC75"
   $options = array(
           CURLOPT_RETURNTRANSFER => true,   // return web page
           CURLOPT_HEADER         => false,  // don't return headers
@@ -17,6 +18,7 @@ function callAPI($method, $url, $data){
           CURLOPT_AUTOREFERER    => true,   // set referrer on redirect
           CURLOPT_CONNECTTIMEOUT => 120,    // time-out on connect
           CURLOPT_TIMEOUT        => 120,    // time-out on response
+          CURLOPT_HTTPHEADER     => array('Content-Type: application/json' , $authorization ))
       );
 
    $curl = curl_init();
@@ -62,5 +64,7 @@ foreach ($myJSON as &$value) {
     }
 }
 
+$myJSON = json_decode(callAPI("GET", $my_bosses, null),true);
+echo json_encode($myJSON);
 
 ?>
