@@ -67,20 +67,14 @@ foreach ($myJSON as &$value) {
 }
 
 $bosses = json_decode(callAPI("GET", $service_url . "?ids=" .$ids, null),true);
-echo $bosses;
 
-echo "--map--";
 
 $myJSON = json_decode(callAPI("GET", $my_bosses, null),true);
 $bossesMap = toMap($bosses);
 
-echo json_encode($bossesMap);
-
-echo "--emap--";
 
 foreach($myJSON as &$value){
     $bossesMap[$value]["done"] = true;
-    echo json_encode($bossesMap[$value]);
 }
 
 
