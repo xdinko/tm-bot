@@ -18,7 +18,6 @@ function callAPI($method, $url, $data){
           CURLOPT_AUTOREFERER    => true,   // set referrer on redirect
           CURLOPT_CONNECTTIMEOUT => 120,    // time-out on connect
           CURLOPT_TIMEOUT        => 120,    // time-out on response
-          CURLOPT_HTTPHEADER     => array('Content-Type: application/json' , $authorization )
       );
 
    $curl = curl_init();
@@ -38,6 +37,7 @@ function callAPI($method, $url, $data){
    // OPTIONS:
    curl_setopt_array($curl, $options);
    curl_setopt($curl, CURLOPT_URL, $url);
+   curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json' , $authorization ));
  //  curl_setopt($curl, CURLOPT_PROXY, $proxy);
  //  curl_setopt($curl, CURLOPT_PROXYUSERPWD, $proxyauth);
 
