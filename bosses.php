@@ -106,9 +106,9 @@ foreach ($bosses as &$value) {
             $event["descr"] = toText($event["id"]);
             $resp = $resp . "" . toText($event["descr"]) . " ";
             if($event["done"]){
-                $resp = $resp . ":white_check_mark: \n";
+                $resp = $resp . "\xE2\x9C\x85 \n";
             }else{
-                $resp = $resp . ":x: \n";
+                $resp = $resp . "\xE2\x9D\x8C \n";
             }
         }
     }
