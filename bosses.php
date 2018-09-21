@@ -54,7 +54,7 @@ foreach ($arr as &$value) {
 
 $myJSON = json_decode(callAPI("GET", $service_url . "?ids=" .$ids, null),true);
 
-echo $myJSON;
+echo json_encode($myJSON);
 
 
 ?>
