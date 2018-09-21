@@ -18,7 +18,7 @@ function callAPI($method, $url, $data){
           CURLOPT_AUTOREFERER    => true,   // set referrer on redirect
           CURLOPT_CONNECTTIMEOUT => 120,    // time-out on connect
           CURLOPT_TIMEOUT        => 120,    // time-out on response
-          CURLOPT_HTTPHEADER     => array('Content-Type: application/json' , $authorization ))
+          CURLOPT_HTTPHEADER     => array('Content-Type: application/json' , $authorization )
       );
 
    $curl = curl_init();
