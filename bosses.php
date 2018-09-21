@@ -115,7 +115,7 @@ foreach ($bosses as &$value) {
 }
 
 	header("Content-Type: application/json");
-	$parameters = array('chat_id' => $chatId, "text" => $resp);
+	$parameters = array('chat_id' => $chatId, "text" => $resp, "parse_mode" => "Markdown");
 	$parameters["method"] = "sendMessage";
 	echo json_encode($parameters);
 
