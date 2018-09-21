@@ -1,4 +1,21 @@
 <?php
+$content = file_get_contents("php://input");
+$update = json_decode($content, true);
+if(!$update)
+{
+  exit;
+}
+$message = isset($update['message']) ? $update['message'] : "";
+$messageId = isset($message['message_id']) ? $message['message_id'] : "";
+$chatId = isset($message['chat']['id']) ? $message['chat']['id'] : "";
+$firstname = isset($message['chat']['first_name']) ? $message['chat']['first_name'] : "";
+$lastname = isset($message['chat']['last_name']) ? $message['chat']['last_name'] : "";
+$username = isset($message['chat']['username']) ? $message['chat']['username'] : "";
+$date = isset($message['date']) ? $message['date'] : "";
+$text = isset($message['text']) ? $message['text'] : "" ;
+$text = trim($text);
+$text = strtolower($text);
+error_log($message['entities'][0]['type'] . $text );
 
 
 function toMap(&$array){
@@ -11,6 +28,10 @@ function toMap(&$array){
        }
    }
     return $map;
+}
+
+function getText(from){
+    return ucwords(str_replace("_"," ",from));
 }
 
 
@@ -77,17 +98,25 @@ foreach($myJSON as &$value){
     $bossesMap[$value]["done"] = true;
 }
 
-
+$resp = "";
 foreach ($bosses as &$value) {
     foreach ($value['wings'] as &$wings) {
+    $resp = $resp . "*" . getText($wings["id"]) . "*\n";
         foreach ($wings['events'] as &$event) {
-            $event["descr"] = str_replace("_"," ",$event["id"]);
-            $event["descr"] = ucwords($event["descr"]);
-            echo json_encode($event);
-
+            $event["descr"] = getText($event["id"]);
+            $resp = $resp . "" . getText($event["descr"]) . " ";
+            if($event["done"]){
+                $resp = $resp . ":white_check_mark: \n";
+            }else{
+                $resp = $resp . ":x: \n";
+            }
         }
     }
 }
 
+	header("Content-Type: application/json");
+	$parameters = array('chat_id' => $chatId, "text" => $resp);
+	$parameters["method"] = "sendMessage";
+	echo json_encode($parameters);
 
 ?>
