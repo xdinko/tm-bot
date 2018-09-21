@@ -6,7 +6,7 @@ function toMap(&$array){
    foreach ($array as &$value) {
        foreach ($value['wings'] as &$wings) {
            foreach ($wings['events'] as &$event) {
-               $map[$event["id"]] = $event;
+               $map[$event["id"]] = &$event;
            }
        }
    }
