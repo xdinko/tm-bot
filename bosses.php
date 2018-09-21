@@ -46,6 +46,15 @@ function callAPI($method, $url, $data){
    return $result;
 }
 
-$myJSON = json_decode(callAPI("GET", $service_url, null), true)[0];
+$myJSON = json_decode(callAPI("GET", $service_url, null),true);
+$ids = "";
+foreach ($arr as &$value) {
+    $ids = $ids . $value . ",";
+}
+
+$myJSON = json_decode(callAPI("GET", $service_url . "?ids=" .$ids, null),true);
+
 echo $myJSON;
+
+
 ?>
