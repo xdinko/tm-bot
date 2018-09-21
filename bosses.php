@@ -104,13 +104,14 @@ foreach ($bosses as &$value) {
     $resp = $resp . "*" . toText($wings["id"]) . "*\n";
         foreach ($wings['events'] as &$event) {
             $event["descr"] = toText($event["id"]);
-            $resp = $resp . "" . toText($event["descr"]) . " ";
             if($event["done"]){
                 $resp = $resp . "\xE2\x9C\x85 \n";
             }else{
                 $resp = $resp . "\xE2\x9D\x8C \n";
             }
+            $resp = $resp . "" . toText($event["descr"]) . " ";
         }
+        $resp = $resp . "*\n";
     }
 }
 
