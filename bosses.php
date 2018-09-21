@@ -46,6 +46,6 @@ function callAPI($method, $url, $data){
    return $result;
 }
 
-echo callAPI("GET", $service_url, null);
+callAPI("GET", $service_url, null);
 
 ?>
