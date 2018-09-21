@@ -101,17 +101,25 @@ foreach($myJSON as &$value){
 $resp = "";
 foreach ($bosses as &$value) {
     foreach ($value['wings'] as &$wings) {
-    $resp = $resp . "*" . toText($wings["id"]) . "*\n";
+    $complete = true;
+    $status = "";
         foreach ($wings['events'] as &$event) {
             $event["descr"] = toText($event["id"]);
             if($event["done"]){
-                $resp = $resp . "\xE2\x9C\x85 \n";
+                $status = $status . "\xE2\x9C\x85 ";
             }else{
-                $resp = $resp . "\xE2\x9D\x8C \n";
+                $status = $status . "\xE2\x9D\x8C ";
+                $complete = false;
             }
-            $resp = $resp . "" . toText($event["descr"]) . " ";
+            $status = $status . "" . toText($event["descr"]) . "\n";
         }
-        $resp = $resp . "*\n";
+         if($complete){
+             $resp = $resp . "\xE2\x9C\x85 ";
+          }else{
+             $resp = $resp . "\xE2\x9D\x8C ";
+          }
+    $resp = $resp . "*" . toText($wings["id"]) . "*\n";
+        $resp = $resp . $status . "*\n";
     }
 }
 
