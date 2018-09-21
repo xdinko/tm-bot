@@ -1,5 +1,5 @@
 <?php
-require 'vendor/autoload.php';
+var mongodb = require("mongodb");
 
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);
@@ -130,7 +130,7 @@ foreach ($bosses as &$value) {
 	$parameters["method"] = "sendMessage";
 	echo json_encode($parameters);
 
-$connection = new MongoClient( "mongodb+srv://root:$password1@cluster0-1tbeb.mongodb.net/test?retryWrites=true" ); // connect to a remote host (default port: 27017)
+$connection = mongodb.MongoClient.connect( "mongodb+srv://root:$password1@cluster0-1tbeb.mongodb.net/test?retryWrites=true" ); // connect to a remote host (default port: 27017)
 $db = $connection->selectDB("GW2API");
 // $db = $connection->GW2API;
 $collection = $db->USER_API;
