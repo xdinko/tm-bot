@@ -1,5 +1,12 @@
 <?php
-  // create curl resource
+
+
+function toMap($array){
+    $map = array();
+    foreach ($array as $row) {
+        $map[$row['id']] = $row;
+    }
+}
 
 
 //next example will recieve all messages for specific conversation
@@ -54,9 +61,19 @@ foreach ($myJSON as &$value) {
     $ids = $ids . $value . ",";
 }
 
-$myJSON = json_decode(callAPI("GET", $service_url . "?ids=" .$ids, null),true);
+$bosses = json_decode(callAPI("GET", $service_url . "?ids=" .$ids, null),true);
 
-foreach ($myJSON as &$value) {
+
+echo "\n";
+$myJSON = json_decode(callAPI("GET", $my_bosses, null),true);
+$bossesMap = toMap($bosses);
+
+for($myJSON as &$value){
+    $bossesMap[$value]["done"] = true;
+}
+
+
+foreach ($bosses as &$value) {
     foreach ($value['wings'] as &$wings) {
         foreach ($wings['events'] as &$event) {
             echo json_encode($event);
@@ -64,7 +81,5 @@ foreach ($myJSON as &$value) {
     }
 }
 
-$myJSON = json_decode(callAPI("GET", $my_bosses, null),true);
-echo json_encode($myJSON);
 
 ?>
