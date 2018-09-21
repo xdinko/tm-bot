@@ -1,7 +1,7 @@
 <?php
 
 
-function toMap($array){
+function toMap(&$array){
     $map = array();
    foreach ($array as &$value) {
        foreach ($value['wings'] as &$wings) {
