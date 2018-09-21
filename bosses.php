@@ -47,6 +47,5 @@ function callAPI($method, $url, $data){
 }
 
 $myJSON = json_encode(callAPI("GET", $service_url, null));
-echo $myJSON;
 
 ?>
