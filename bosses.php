@@ -8,7 +8,7 @@ $my_bosses = "https://api.guildwars2.com/v2/account/raids";
 function callAPI($method, $url, $data){
   $proxy = 'proxy.eng.it:3128';
   $proxyauth = 'cramato:Cri%2487i%40n';
-  $authorization = "Authorization: Bearer 4D60AA9D-3C10-0343-81FB-5E905F6F4B5E842E09EA-AFF4-40CB-9AC8-AA6FB4F0FC75"
+  $authorization = "Authorization: Bearer 4D60AA9D-3C10-0343-81FB-5E905F6F4B5E842E09EA-AFF4-40CB-9AC8-AA6FB4F0FC75";
   $options = array(
           CURLOPT_RETURNTRANSFER => true,   // return web page
           CURLOPT_HEADER         => false,  // don't return headers
