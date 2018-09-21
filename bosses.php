@@ -68,7 +68,7 @@ echo "\n";
 $myJSON = json_decode(callAPI("GET", $my_bosses, null),true);
 $bossesMap = toMap($bosses);
 
-for($myJSON as &$value){
+foreach($myJSON as &$value){
     $bossesMap[$value]["done"] = true;
 }
 
