@@ -81,7 +81,10 @@ foreach($myJSON as &$value){
 foreach ($bosses as &$value) {
     foreach ($value['wings'] as &$wings) {
         foreach ($wings['events'] as &$event) {
+            $event["descr"] = str_replace("_"," ",$event["id"]);
+            $event["descr"] = ucwords($event["descr"]);
             echo json_encode($event);
+
         }
     }
 }
