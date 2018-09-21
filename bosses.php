@@ -6,6 +6,7 @@ function toMap($array){
     foreach ($array as $row) {
         $map[$row['id']] = $row;
     }
+    return $map;
 }
 
 
