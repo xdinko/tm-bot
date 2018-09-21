@@ -30,7 +30,7 @@ function toMap(&$array){
     return $map;
 }
 
-function getText(from){
+function getText(from) {
     return ucwords(str_replace("_"," ",from));
 }
 
