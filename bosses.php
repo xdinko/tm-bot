@@ -3,9 +3,13 @@
 
 function toMap($array){
     $map = array();
-    foreach ($array as $row) {
-        $map[$row['id']] = $row;
-    }
+   foreach ($bosses as &$value) {
+       foreach ($value['wings'] as &$wings) {
+           foreach ($wings['events'] as &$event) {
+               $map[$event["id"]] = $event;
+           }
+       }
+   }
     return $map;
 }
 
