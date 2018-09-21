@@ -128,4 +128,10 @@ foreach ($bosses as &$value) {
 	$parameters["method"] = "sendMessage";
 	echo json_encode($parameters);
 
+$connection = new MongoClient( "mongodb+srv://root:$password1@cluster0-1tbeb.mongodb.net/test?retryWrites=true" ); // connect to a remote host (default port: 27017)
+$db = $connection->GW2API;
+$collection = $db->USER_API;
+$document = $collection->findOne();
+echo $document;
+
 ?>
