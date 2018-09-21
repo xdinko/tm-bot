@@ -3,7 +3,7 @@
 
 function toMap($array){
     $map = array();
-   foreach ($bosses as &$value) {
+   foreach ($array as &$value) {
        foreach ($value['wings'] as &$wings) {
            foreach ($wings['events'] as &$event) {
                $map[$event["id"]] = $event;
@@ -67,7 +67,7 @@ foreach ($myJSON as &$value) {
 }
 
 $bosses = json_decode(callAPI("GET", $service_url . "?ids=" .$ids, null),true);
-
+echo $bosses;
 
 echo "--map--";
 
