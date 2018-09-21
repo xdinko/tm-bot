@@ -70,6 +70,7 @@ $bossesMap = toMap($bosses);
 
 foreach($myJSON as &$value){
     $bossesMap[$value]["done"] = true;
+    echo json_encode($bossesMap[$value]);
 }
 
 
