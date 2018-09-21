@@ -54,7 +54,13 @@ foreach ($myJSON as &$value) {
 
 $myJSON = json_decode(callAPI("GET", $service_url . "?ids=" .$ids, null),true);
 
-echo json_encode($myJSON);
+foreach ($myJSON as &$value) {
+    foreach ($value['wings'] as &$wings) {
+        foreach ($wings['events'] as &$event) {
+            echo json_encode($event);
+        }
+    }
+}
 
 
 ?>
