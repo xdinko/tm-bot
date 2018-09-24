@@ -34,7 +34,7 @@ $key = key((array)$name);
 if($key === NULL || !$key){
   error_log("-----VUOTO-----");
   header("Content-Type: application/json");
-  $parameters = array('chat_id' => $chatId, "text" => "Nessuna API KEY associtata al tuo account\n Registra un API KEY utilizzando il comando /key {API_KEY}");
+  $parameters = array('chat_id' => $chatId, "text" => "No API key associated with " . $username . ". Add your key using _/key add {API_KEY} {NAME}_ command. If you don't know how, the command includes a tutorial.", "parse_mode" => "Markdown");
   $parameters["method"] = "sendMessage";
   echo json_encode($parameters);
   return;
