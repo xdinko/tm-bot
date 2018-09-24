@@ -22,5 +22,5 @@ $firebase->set(DEFAULT_PATH . '/name/contact001', "John Doe");
 
 // --- reading the stored string ---
 $name = $firebase->get(DEFAULT_PATH . '/name/contact001');
-
+echo $name;
 ?>
