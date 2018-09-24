@@ -32,9 +32,10 @@ $name = $firebase->get(DEFAULT_PATH . '/active/', array("orderBy" => "\"status\"
 
 $key = key((array)$name);
 if($key === NULL || !$key){
-  error_log("-----VUOTO-----");
+  $mex = "No API key associated with " . $username . ". Add your key using _/key add {API_KEY} {NAME}_ command. If you don't know how, the command includes a tutorial.";
+  error_log("-----VUOTO-----" . $mex);
   header("Content-Type: application/json");
-  $parameters = array('chat_id' => $chatId, "text" => "No API key associated with " . $username . ". Add your key using _/key add {API_KEY} {NAME}_ command. If you don't know how, the command includes a tutorial.", "parse_mode" => "Markdown");
+  $parameters = array('chat_id' => $chatId, "text" => $mex, "parse_mode" => "markdown");
   $parameters["method"] = "sendMessage";
   echo json_encode($parameters);
   return;
@@ -148,7 +149,7 @@ foreach ($bosses as &$value) {
 }
 
 	header("Content-Type: application/json");
-	$parameters = array('chat_id' => $chatId, "text" => $resp, "parse_mode" => "Markdown");
+	$parameters = array('chat_id' => $chatId, "text" => $resp, "parse_mode" => "markdown");
 	$parameters["method"] = "sendMessage";
 	echo json_encode($parameters);
 
