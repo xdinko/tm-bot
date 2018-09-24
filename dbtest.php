@@ -4,7 +4,7 @@ require('./vendor/ktamas77/firebase-php/src/firebaseLib.php');
 
 const DEFAULT_URL = 'https://gw2rbot.firebaseio.com/';
 const DEFAULT_TOKEN = 'n5p3CRjh2GCLIijiVrDhYcDidLOlUrukaLUqsiXQ';
-const DEFAULT_PATH = '/firebase/gw2rbot';
+const DEFAULT_PATH = '/';
 
 $firebase = new \Firebase\FirebaseLib(DEFAULT_URL, DEFAULT_TOKEN);
 
