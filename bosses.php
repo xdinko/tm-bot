@@ -31,7 +31,8 @@ error_log($message['entities'][0]['type'] . $text );
 $name = $firebase->get(DEFAULT_PATH . '/active/', array("orderBy" => "\"status\"", "equalTo" => "\"" . $username . "_active\""));
 
 $key = key((array)$name);
-if($key === NULL){
+if($key === NULL || !$key){
+  error_log("-----VUOTO-----");
   header("Content-Type: application/json");
   $parameters = array('chat_id' => $chatId, "text" => "Nessuna API KEY associtata al tuo account\n Registra un API KEY utilizzando il comando /key {API_KEY}", "parse_mode" => "Markdown");
   $parameters["method"] = "sendMessage";
@@ -39,7 +40,7 @@ if($key === NULL){
   return;
 }
 error_log($name);
-
+error_log($key);
 
 function toMap(&$array){
     $map = array();
