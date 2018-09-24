@@ -3,7 +3,7 @@
 require('./vendor/ktamas77/firebase-php/src/firebaseLib.php');
 
 const DEFAULT_URL = 'https://gw2rbot.firebaseio.com/';
-const DEFAULT_TOKEN = 'AIzaSyD7xGhahp14A9V3EUZe2v_4NU1WHrmYmf0';
+const DEFAULT_TOKEN = 'n5p3CRjh2GCLIijiVrDhYcDidLOlUrukaLUqsiXQ';
 const DEFAULT_PATH = '/firebase/gw2rbot';
 
 $firebase = new \Firebase\FirebaseLib(DEFAULT_URL, DEFAULT_TOKEN);
