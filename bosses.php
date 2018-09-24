@@ -28,7 +28,7 @@ $text = strtolower($text);
 error_log($message['entities'][0]['type'] . $text );
 
 // --- reading the stored string ---
-$name = $firebase->get(DEFAULT_PATH . '/active/', {"orderBy" => "status", "equalTo" => $username . "_active", });
+$name = $firebase->get(DEFAULT_PATH . '/active/', array("orderBy" => "status", "equalTo" => $username . "_active");
 echo $name;
 
 
