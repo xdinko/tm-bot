@@ -32,7 +32,7 @@ $name = $firebase->get(DEFAULT_PATH . '/active/', array("orderBy" => "\"status\"
 
 $key = key((array)$name);
 if($key === NULL || !$key){
-  $mex = "No API key associated with " . $username . ". Add your key using _/key add {API_KEY} {NAME}_ command. If you don't know how, the command includes a tutorial.";
+  $mex = "No API key associated with " . $username . ". Add your key using *\/key add {API_KEY} {NAME}* command. If you don't know how, the command includes a tutorial.";
   error_log("-----VUOTO-----" . $mex);
   header("Content-Type: application/json");
   $parameters = array('chat_id' => $chatId, "text" => $mex, "parse_mode" => "markdown");
