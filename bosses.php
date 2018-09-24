@@ -1,5 +1,14 @@
 <?php
 
+
+require('./vendor/ktamas77/firebase-php/src/firebaseLib.php');
+
+const DEFAULT_URL = 'https://gw2rbot.firebaseio.com/';
+const DEFAULT_TOKEN = 'n5p3CRjh2GCLIijiVrDhYcDidLOlUrukaLUqsiXQ';
+const DEFAULT_PATH = '';
+
+$firebase = new \Firebase\FirebaseLib(DEFAULT_URL, DEFAULT_TOKEN);
+
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);
 if(!$update)
@@ -17,6 +26,10 @@ $text = isset($message['text']) ? $message['text'] : "" ;
 $text = trim($text);
 $text = strtolower($text);
 error_log($message['entities'][0]['type'] . $text );
+
+// --- reading the stored string ---
+$name = $firebase->get(DEFAULT_PATH . '/active/', {"orderBy" => "status", "equalTo" => $username . "_active", });
+echo $name;
 
 
 function toMap(&$array){
