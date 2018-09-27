@@ -48,7 +48,7 @@ if(count($command) > 2){
 }else{
 // --- reading the stored string ---
 	
-	error_log("-----CERCO-----" . $username . "_active\");
+	error_log("-----CERCO-----" . $username . "_active");
 $name = $firebase->get(DEFAULT_PATH . '/active/', array("orderBy" => "\"status\"", "equalTo" => "\"" . $username . "_active\""));
 
 $key = key((array)$name);
