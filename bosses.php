@@ -34,7 +34,13 @@ if(count($command) > 2){
 }else{
 	$apiKey = $command[2];
 	$apiName = count($command) > 3?implode(",", array_slice($command, 3));
-	error_log($apiKey . ' - ' . $apiName);
+	$mex = $apiKey . " - " . $apiName;
+
+  header("Content-Type: application/json");
+  $parameters = array('chat_id' => $chatId, "text" => $mex, "parse_mode" => "markdown");
+  $parameters["method"] = "sendMessage";
+  echo json_encode($parameters);
+  return;
 }
 }else{
 // --- reading the stored string ---
