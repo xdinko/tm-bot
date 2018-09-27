@@ -32,7 +32,7 @@ if(substr($text, 0, strlen("/key")) === "/key"){
 $command = explode(" ", $text);
 if(count($command) > 2){
 	$apiKey = $command[2];
-	$apiName = count($command) > 3?implode(",", array_slice($command, 3)):null;
+	$apiName = count($command) > 3?implode(" ", array_slice($command, 3)):null;
 	$mex = $apiKey . " - " . $apiName;
 
   header("Content-Type: application/json");
