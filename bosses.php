@@ -23,10 +23,20 @@ $lastname = isset($message['chat']['last_name']) ? $message['chat']['last_name']
 $username = isset($message['chat']['username']) ? $message['chat']['username'] : "";
 $date = isset($message['date']) ? $message['date'] : "";
 $text = isset($message['text']) ? $message['text'] : "" ;
-$text = trim($text);
-$text = strtolower($text);
+//$text = trim($text);
+//$text = strtolower($text);
 error_log($message['entities'][0]['type'] . $text );
 
+
+if(substr($text, 0, strlen("/key")) === "/key"){
+$command = explode(" ", $text);
+if(count($command) > 2){
+}else{
+	$apiKey = $command[2];
+	$apiName = count($command) > 3?implode(",", array_slice($command, 3));
+	error_log($apiKey . ' - ' . $apiName);
+}
+}else{
 // --- reading the stored string ---
 $name = $firebase->get(DEFAULT_PATH . '/active/', array("orderBy" => "\"status\"", "equalTo" => "\"" . $username . "_active\""));
 
@@ -153,5 +163,5 @@ foreach ($bosses as &$value) {
 	$parameters["method"] = "sendMessage";
 	echo json_encode($parameters);
 
-
+}
 ?>
