@@ -34,7 +34,7 @@ if(count($command) > 2){
 	$apiKey = $command[2];
 	$apiName = count($command) > 3?implode(" ", array_slice($command, 3)):null;
 	$mex = "Saved!";
-	$firebase->set(DEFAULT_PATH . '/active' . $apiKey, array("active" => true, "status" => $username . "_active", "name" => $apiName, "username" => $username));
+	$firebase->set(DEFAULT_PATH . '/active/' . $apiKey, array("active" => true, "status" => $username . "_active", "name" => $apiName, "username" => $username));
 	
 
   header("Content-Type: application/json");
@@ -49,7 +49,7 @@ if(count($command) > 2){
 // --- reading the stored string ---
 	
 	error_log("-----CERCO-----" . $username . "_active");
-$name = $firebase->get(DEFAULT_PATH . '/active/', array("orderBy" => "\"status\"", "equalTo" => "\"" . $username . "_active\""));
+$name = $firebase->get(DEFAULT_PATH . '/active', array("orderBy" => "\"status\"", "equalTo" => "\"" . $username . "_active\""));
 error_log($name);
 $key = $name; // key((array)$name);
 if($key === NULL || !$key){
