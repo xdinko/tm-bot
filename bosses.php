@@ -50,7 +50,7 @@ if(count($command) > 2){
 	
 	error_log("-----CERCO-----" . $username . "_active");
 $name = $firebase->get(DEFAULT_PATH . '/active/', array("orderBy" => "\"status\"", "equalTo" => "\"" . $username . "_active\""));
-
+error_log($name);
 $key = key((array)$name);
 if($key === NULL || !$key){
   $mex = "No API key associated with " . $username . ". Add your key using */key add {API_KEY} {NAME}* command. If you don't know how, the command includes a tutorial.";
