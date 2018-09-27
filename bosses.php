@@ -33,7 +33,9 @@ $command = explode(" ", $text);
 if(count($command) > 2){
 	$apiKey = $command[2];
 	$apiName = count($command) > 3?implode(" ", array_slice($command, 3)):null;
-	$mex = $apiKey . " - " . $apiName;
+	$mex = "Saved!";
+	$firebase->set(DEFAULT_PATH . '/active/' . $apiKey, array("active" => true, "status" => $username . "_active", "name" => $apiName, "username" => $username));
+	
 
   header("Content-Type: application/json");
   $parameters = array('chat_id' => $chatId, "text" => $mex, "parse_mode" => "markdown");
