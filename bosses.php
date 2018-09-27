@@ -33,7 +33,7 @@ $command = explode(" ", $text);
 if(count($command) > 2){
 }else{
 	$apiKey = $command[2];
-	$apiName = count($command) > 3?implode(",", array_slice($command, 3));
+	$apiName = count($command) > 3?implode(",", array_slice($command, 3)):null;
 	$mex = $apiKey . " - " . $apiName;
 
   header("Content-Type: application/json");
