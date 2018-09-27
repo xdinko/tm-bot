@@ -31,7 +31,6 @@ error_log($message['entities'][0]['type'] . $text );
 if(substr($text, 0, strlen("/key")) === "/key"){
 $command = explode(" ", $text);
 if(count($command) > 2){
-}else{
 	$apiKey = $command[2];
 	$apiName = count($command) > 3?implode(",", array_slice($command, 3)):null;
 	$mex = $apiKey . " - " . $apiName;
@@ -41,6 +40,8 @@ if(count($command) > 2){
   $parameters["method"] = "sendMessage";
   echo json_encode($parameters);
   return;
+}else{
+	
 }
 }else{
 // --- reading the stored string ---
