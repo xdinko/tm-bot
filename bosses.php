@@ -7,7 +7,7 @@ const DEFAULT_URL = 'https://gw2rbot.firebaseio.com/';
 const DEFAULT_TOKEN = 'n5p3CRjh2GCLIijiVrDhYcDidLOlUrukaLUqsiXQ';
 const DEFAULT_PATH = '';
 
-const LI_ID = 77302;
+$LI_ID = 77302;
 const LI = "/li";
 const KEY = "/key";
 const BOSSES = "/bosses";
@@ -195,8 +195,8 @@ foreach ($bosses as &$value) {
 $myJSON = json_decode(callAPI("GET", $my_li, null, $key),true);
 $myLi = array_filter(
     $myJSON,
-    function ($e) use (&LI_ID) {
-        return $e->id == LI_ID;
+    function ($e) use (&$LI_ID) {
+        return $e->id == $LI_ID;
     }
 );
 	error_log(json_encode($myLi));
