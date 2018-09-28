@@ -7,8 +7,53 @@ const DEFAULT_URL = 'https://gw2rbot.firebaseio.com/';
 const DEFAULT_TOKEN = 'n5p3CRjh2GCLIijiVrDhYcDidLOlUrukaLUqsiXQ';
 const DEFAULT_PATH = '';
 
+const LI_ID = 77302;
+const LI = "/li";
 const KEY = "/key";
 const BOSSES = "/bosses";
+
+function callAPI($method, $url, $data, $key){
+  $proxy = 'proxy.eng.it:3128';
+  $proxyauth = 'cramato:Cri%2487i%40n';
+  $authorization = "Authorization: Bearer " . $key;
+  $options = array(
+          CURLOPT_RETURNTRANSFER => true,   // return web page
+          CURLOPT_HEADER         => false,  // don't return headers
+          CURLOPT_FOLLOWLOCATION => true,   // follow redirects
+          CURLOPT_MAXREDIRS      => 10,     // stop after 10 redirects
+          CURLOPT_ENCODING       => "",     // handle compressed
+          CURLOPT_AUTOREFERER    => true,   // set referrer on redirect
+          CURLOPT_CONNECTTIMEOUT => 120,    // time-out on connect
+          CURLOPT_TIMEOUT        => 120,    // time-out on response
+      );
+
+   $curl = curl_init();
+   switch ($method){
+      case "POST":
+         curl_setopt($curl, CURLOPT_POST, 1);
+         if ($data)
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+         break;
+      case "PUT":
+         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+         if ($data)
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+         break;
+   }
+
+   // OPTIONS:
+   curl_setopt_array($curl, $options);
+   curl_setopt($curl, CURLOPT_URL, $url);
+   curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json' , $authorization ));
+ //  curl_setopt($curl, CURLOPT_PROXY, $proxy);
+ //  curl_setopt($curl, CURLOPT_PROXYUSERPWD, $proxyauth);
+
+   // EXECUTE:
+   $result = curl_exec($curl);
+   if(!$result){die("Connection Failure");}
+   curl_close($curl);
+   return $result;
+}
 
 $firebase = new \Firebase\FirebaseLib(DEFAULT_URL, DEFAULT_TOKEN);
 
@@ -94,48 +139,7 @@ function toText($from) {
 //next example will recieve all messages for specific conversation
 $service_url = 'http://api.guildwars2.com/v2/raids';
 $my_bosses = "https://api.guildwars2.com/v2/account/raids";
-function callAPI($method, $url, $data, $key){
-  $proxy = 'proxy.eng.it:3128';
-  $proxyauth = 'cramato:Cri%2487i%40n';
-  $authorization = "Authorization: Bearer " . $key;
-  $options = array(
-          CURLOPT_RETURNTRANSFER => true,   // return web page
-          CURLOPT_HEADER         => false,  // don't return headers
-          CURLOPT_FOLLOWLOCATION => true,   // follow redirects
-          CURLOPT_MAXREDIRS      => 10,     // stop after 10 redirects
-          CURLOPT_ENCODING       => "",     // handle compressed
-          CURLOPT_AUTOREFERER    => true,   // set referrer on redirect
-          CURLOPT_CONNECTTIMEOUT => 120,    // time-out on connect
-          CURLOPT_TIMEOUT        => 120,    // time-out on response
-      );
 
-   $curl = curl_init();
-   switch ($method){
-      case "POST":
-         curl_setopt($curl, CURLOPT_POST, 1);
-         if ($data)
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-         break;
-      case "PUT":
-         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
-         if ($data)
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-         break;
-   }
-
-   // OPTIONS:
-   curl_setopt_array($curl, $options);
-   curl_setopt($curl, CURLOPT_URL, $url);
-   curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json' , $authorization ));
- //  curl_setopt($curl, CURLOPT_PROXY, $proxy);
- //  curl_setopt($curl, CURLOPT_PROXYUSERPWD, $proxyauth);
-
-   // EXECUTE:
-   $result = curl_exec($curl);
-   if(!$result){die("Connection Failure");}
-   curl_close($curl);
-   return $result;
-}
 
 $myJSON = json_decode(callAPI("GET", $service_url, null, $key),true);
 $ids = "";
@@ -184,5 +188,23 @@ foreach ($bosses as &$value) {
 	$parameters["method"] = "sendMessage";
 	echo json_encode($parameters);
 
+}else if (substr($text, 0, strlen(LI)) === LI){
+	$my_li = "https://api.guildwars2.com/v2/account/materials";
+
+
+$myJSON = json_decode(callAPI("GET", $my_li, null, $key),true);
+$myLi = array_filter(
+    $myJSON,
+    function ($e) use (&$searchedValue) {
+        return $e->id == LI_ID;
+    }
+);
+	
+	$resp = count($myLi) == 0 ? 0 : ($myLi[0]["count"] . "Legendary Insights");
+	header("Content-Type: application/json");
+	$parameters = array('chat_id' => $chatId, "text" => $resp, "parse_mode" => "markdown");
+	$parameters["method"] = "sendMessage";
+	echo json_encode($parameters);
+	
 }
 ?>
