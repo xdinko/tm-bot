@@ -13,6 +13,17 @@ const LI = "/li";
 const KEY = "/key";
 const BOSSES = "/bosses";
 
+function mySearch($array, $key, $val){
+	if($key == NULL){
+		$key = "id";
+	}
+foreach ($array as &$item) {
+	if($item[$key] == $val){
+		return $item;
+	}
+	return NULL;
+}
+
 function callAPI($method, $url, $data, $key){
   $proxy = 'proxy.eng.it:3128';
   $proxyauth = 'cramato:Cri%2487i%40n';
@@ -209,21 +220,12 @@ error_log($key);
 
 $myJSON = json_decode(callAPI("GET", $my_li, null, $key),true);
 
-	$myLi = array_filter(
-    $myJSON,
-    function ($e) {
-        return $e->id == $LI_ID;
-    }
-);
-	$myLd = array_filter(
-    $myJSON,
-    function ($e) {
-        return $e->id == $LD_ID;
-    }
-);
+	$myLi = mySearch($myJSON, "id", $LI_ID);
+	$myLd = mySearch($myJSON, "id", $LD_ID);
 	error_log(json_encode($myLi));
-	$resp = (count($myLi) == 0 ? 0 : $myLi[0]["count"]) . " Legendary Insights\n";
-	$resp = $resp . (count($myLd) == 0 ? 0 : $myLd[0]["count"]) . " Legendary Divination";
+	error_log(json_encode($myLd));
+	$resp = ($myLi == NULL ? 0 : $myLi[0]["count"]) . " Legendary Insights\n";
+	$resp = $resp . ($myLd == NULL ? 0 : $myLd[0]["count"]) . " Legendary Divination";
 	header("Content-Type: application/json");
 	$parameters = array('chat_id' => $chatId, "text" => $resp, "parse_mode" => "markdown");
 	$parameters["method"] = "sendMessage";
