@@ -189,6 +189,20 @@ foreach ($bosses as &$value) {
 	echo json_encode($parameters);
 
 }else if (substr($text, 0, strlen(LI)) === LI){
+	$name = $firebase->get(DEFAULT_PATH . '/active', array("orderBy" => "\"status\"", "equalTo" => "\"" . $username . "_active\""));
+error_log($name);
+$key = key((array)json_decode($name));
+if($name === NULL || !$name){
+  $mex = "No API key associated with " . $username . ". Add your key using */key add {API_KEY} {NAME}* command. If you don't know how, the command includes a tutorial.";
+  error_log("-----VUOTO-----" . $mex);
+  header("Content-Type: application/json");
+  $parameters = array('chat_id' => $chatId, "text" => $mex, "parse_mode" => "markdown");
+  $parameters["method"] = "sendMessage";
+  echo json_encode($parameters);
+  return;
+}
+error_log($name);
+error_log($key);
 	$my_li = "https://api.guildwars2.com/v2/account/materials";
 
 
