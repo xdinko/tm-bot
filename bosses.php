@@ -21,6 +21,8 @@ foreach ($array as &$item) {
 	if($item[$key] == $val){
 		return $item;
 	}
+	
+}
 	return NULL;
 }
 
