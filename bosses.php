@@ -79,7 +79,7 @@ error_log($message['entities'][0]['type'] . $text );
 
 if(substr($text, 0, strlen(KEY)) === KEY){
 $command = explode(" ", $text);
-if(count($command) > 2 && $command[2] != NULL && strlen($command[2]) > 0 && ){
+if(count($command) > 2 && $command[2] != NULL && strlen($command[2]) > 0 ){
 	$apiKey = $command[2];
 	$apiName = count($command) > 3?implode(" ", array_slice($command, 3)):null;
 	$mex = "Saved!";
