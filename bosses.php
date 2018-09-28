@@ -199,8 +199,8 @@ $myLi = array_filter(
         return $e->id == LI_ID;
     }
 );
-	error_log($myLi);
-	$resp = (count($myLi) == 0 ? 0 : $myLi[0]["count"]) . "Legendary Insights";
+	error_log(json_encode($myLi));
+	$resp = (count($myLi) == 0 ? 0 : $myLi[0]["count"]) . " Legendary Insights";
 	header("Content-Type: application/json");
 	$parameters = array('chat_id' => $chatId, "text" => $resp, "parse_mode" => "markdown");
 	$parameters["method"] = "sendMessage";
