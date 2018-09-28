@@ -195,7 +195,7 @@ foreach ($bosses as &$value) {
 $myJSON = json_decode(callAPI("GET", $my_li, null, $key),true);
 $myLi = array_filter(
     $myJSON,
-    function ($e) use (&$searchedValue) {
+    function ($e) use (LI_ID) {
         return $e->id == LI_ID;
     }
 );
