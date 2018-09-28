@@ -8,6 +8,7 @@ const DEFAULT_TOKEN = 'n5p3CRjh2GCLIijiVrDhYcDidLOlUrukaLUqsiXQ';
 const DEFAULT_PATH = '';
 
 $LI_ID = 77302;
+$LD_ID = 88485;
 const LI = "/li";
 const KEY = "/key";
 const BOSSES = "/bosses";
@@ -208,14 +209,22 @@ error_log($key);
 
 $myJSON = json_decode(callAPI("GET", $my_li, null, $key),true);
 	error_log(json_encode($myJSON));
-$myLi = array_filter(
+
+	$myLi = array_filter(
     $myJSON,
-    function ($e) use (&$LI_ID) {
+    function ($e) {
         return $e->id == $LI_ID;
     }
 );
+	$myLd = array_filter(
+    $myJSON,
+    function ($e) {
+        return $e->id == $LD_ID;
+    }
+);
 	error_log(json_encode($myLi));
-	$resp = (count($myLi) == 0 ? 0 : $myLi[0]["count"]) . " Legendary Insights";
+	$resp = (count($myLi) == 0 ? 0 : $myLi[0]["count"]) . " Legendary Insights\n";
+	$resp = $resp . (count($myLd) == 0 ? 0 : $myLd[0]["count"]) . " Legendary Divination";
 	header("Content-Type: application/json");
 	$parameters = array('chat_id' => $chatId, "text" => $resp, "parse_mode" => "markdown");
 	$parameters["method"] = "sendMessage";
