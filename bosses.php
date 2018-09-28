@@ -193,6 +193,7 @@ foreach ($bosses as &$value) {
 
 
 $myJSON = json_decode(callAPI("GET", $my_li, null, $key),true);
+	error_log(json_encode($myJSON));
 $myLi = array_filter(
     $myJSON,
     function ($e) use (&$LI_ID) {
