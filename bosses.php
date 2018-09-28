@@ -7,8 +7,8 @@ const DEFAULT_URL = 'https://gw2rbot.firebaseio.com/';
 const DEFAULT_TOKEN = 'n5p3CRjh2GCLIijiVrDhYcDidLOlUrukaLUqsiXQ';
 const DEFAULT_PATH = '';
 
-const DEFAULT KEY = "/key";
-const DEFAULT BOSSES = "/bosses";
+const KEY = "/key";
+const BOSSES = "/bosses";
 
 $firebase = new \Firebase\FirebaseLib(DEFAULT_URL, DEFAULT_TOKEN);
 
