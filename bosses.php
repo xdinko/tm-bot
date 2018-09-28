@@ -7,6 +7,9 @@ const DEFAULT_URL = 'https://gw2rbot.firebaseio.com/';
 const DEFAULT_TOKEN = 'n5p3CRjh2GCLIijiVrDhYcDidLOlUrukaLUqsiXQ';
 const DEFAULT_PATH = '';
 
+const DEFAULT KEY = "/key";
+const DEFAULT BOSSES = "/bosses";
+
 $firebase = new \Firebase\FirebaseLib(DEFAULT_URL, DEFAULT_TOKEN);
 
 $content = file_get_contents("php://input");
@@ -28,7 +31,7 @@ $text = isset($message['text']) ? $message['text'] : "" ;
 error_log($message['entities'][0]['type'] . $text );
 
 
-if(substr($text, 0, strlen("/key")) === "/key"){
+if(substr($text, 0, strlen(KEY)) === KEY){
 $command = explode(" ", $text);
 if(count($command) > 2){
 	$apiKey = $command[2];
@@ -45,7 +48,7 @@ if(count($command) > 2){
 }else{
 	
 }
-}else{
+}else if (substr($text, 0, strlen(BOSSES)) === BOSSES){
 // --- reading the stored string ---
 	
 	error_log("-----CERCO-----" . $username . "_active");
